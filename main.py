@@ -1,19 +1,14 @@
-import sched, time
+# Description: This is the main script that will run the send_emails.py script every day at 6:30am
 
-s = sched.scheduler(time.time, time.sleep)
+import schedule
+import time
 
-def print_time(a='default'):
-    print("From print_time", time.time(), a)
+def job():
+    print("I'm working...")
 
-def print_some_times():
-    print(time.time())
-    s.enter(10, 1, print_time)
-    s.enter(5, 2, print_time, argument=('positional',))
-    # despite having higher priority, 'keyword' runs after 'positional' as enter() is relative
-    s.enter(5, 1, print_time, kwargs={'a': 'keyword'})
-    s.enterabs(1_650_000_000, 10, print_time, argument=("first enterabs",))
-    s.enterabs(1_650_000_000, 5, print_time, argument=("second enterabs",))
-    s.run()
-    print(time.time())
+if __name__ == "__main__":
+    schedule.every().day.at("06:30").do(job)
 
-print_some_times()
+    while True:
+        schedule.run_pending()
+        time.sleep(1)

@@ -8,3 +8,4 @@ from dotenv import load_dotenv
 
 PORT = 587  # For starttls
 EMAIL_SERVER = "smtp-mail.outlook.com"
+
